@@ -1,0 +1,98 @@
+[general]
+excluded_routes=192.168.0.0/16, 172.16.0.0/12, 100.64.0.0/10, 10.0.0.0/8
+geo_location_checker=http://ip-api.com/json/?lang=zh-CN, https://github.com/KOP-XIAO/QuantumultX/raw/master/Scripts/IP_API.js
+network_check_url=http://www.baidu.com/
+server_check_url=http://www.gstatic.com/generate_204
+
+[dns]
+server=119.29.29.29
+server=223.5.5.5
+##server=1.0.0.1
+##server=8.8.8.8
+
+#set($inclueItems = ["vmess", "trojan"])
+#set($supportSevers = [])
+#foreach($item in $servers)
+    #if($inclueItems.contains($item.protocol))
+        #set($result = $supportSevers.add($item))
+    #end
+#end
+#set($delimiter = ", ")
+#set($serverNames = "")
+#foreach($item in $supportSevers)
+    #if($inclueItems.contains($item.protocol))
+        #if($foreach.hasNext)
+            #set($serverNames = "$serverNames$item.serverName$delimiter")
+        #else
+            #set($serverNames = "$serverNames$item.serverName")
+        #end
+    #end
+#end
+[policy]
+static=🔰 代理, ♻️ 自动选择, 🎯 直连, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Proxy.png
+available=♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Auto.png
+static=🐳 OpenAI, 🔰 代理, 🎯 直连, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Bot.png
+static=💰 PayPal, 🔰 代理, 🎯 直连, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/PayPal.png
+static=🏖 YouTube, 🔰 代理, ♻️ 自动选择, 🎯 直连, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/YouTube.png
+static=🛍 亚马逊, 🔰 代理, 🎯 直连, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/AWS.png
+static=🐶 谷歌, 🔰 代理, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Google.png
+static=👔️ 微软, 🔰 代理, 🎯 直连, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Microsoft.png
+static=🍎 苹果, 🎯 直连, 🔰 代理, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Apple.png
+static=🐚 Whatsapp, 🎯 直连, 🔰 代理, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/WeChat.png
+static=👙 TikTok, 🎯 直连, 🔰 代理, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/WeChat.png
+static=☁️ iCloud, 🎯 直连, 🔰 代理, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/iCloud.png
+static=🎯 直连, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Direct.png
+static=🚫 拦截, REJECT, DIRECT, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Advertising.png
+#if($whitelist)
+static=⛳️ 其他,🔰 代理,  🎯 直连, ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Final.png
+#else
+static=⛳️ 其他,🎯 直连, 🔰 代理,  ♻️ 自动选择, $serverNames, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Final.png
+#end
+
+
+[server_remote]
+$proxiesUrl, tag=RemoteServer
+
+[filter_remote]
+$rootUrl/subscribe/rules/quanx/MyReject.list/$URLEncoder.encode("🚫 拦截", "UTF-8"), tag=🚫 拦截, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/MyDirect.list/$URLEncoder.encode("🎯 直连", "UTF-8"), tag=🎯 直连, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/MyProxy.list/$URLEncoder.encode("🔰 代理", "UTF-8"), tag=🔰 代理, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/PayPal.list/$URLEncoder.encode("💰 PayPal", "UTF-8"), tag=💰 PayPal, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/YouTube.list/$URLEncoder.encode("🏖 YouTube", "UTF-8"), tag=🏖 YouTube, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Google.list/$URLEncoder.encode("🐶 谷歌", "UTF-8"), tag=🐶 谷歌, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Amazon.list/$URLEncoder.encode("🛍 亚马逊", "UTF-8"), tag=🛍 亚马逊, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Microsoft.list/$URLEncoder.encode("👔️ 微软", "UTF-8"), tag=👔️ 微软, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Apple.list/$URLEncoder.encode("🍎 苹果", "UTF-8"), tag=🍎 苹果, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/iCloud.list/$URLEncoder.encode("☁️ iCloud", "UTF-8"), tag=☁️ iCloud, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Private.list/$URLEncoder.encode("🎯 直连", "UTF-8"), tag=🎯 直连, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/Reject.list/$URLEncoder.encode("🚫 拦截", "UTF-8"), tag=🚫 拦截, update-interval=86400, enabled=true
+$rootUrl/subscribe/rules/quanx/TelegramCidr.list/$URLEncoder.encode("🔰 代理", "UTF-8"), tag=🔰 代理, update-interval=86400, enabled=true
+#if($whitelist)
+$rootUrl/subscribe/rules/quanx/Direct.list/$URLEncoder.encode("🎯 直连", "UTF-8"), tag=🎯 直连, update-interval=86400, enabled=true
+#else
+$rootUrl/subscribe/rules/quanx/Proxy.list/$URLEncoder.encode("🔰 代理", "UTF-8"), tag=🔰 代理, update-interval=86400, enabled=true
+#end
+
+[rewrite_remote]
+##https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult%20X/TikTok-US.conf/$URLEncoder.encode("TikTok", "UTF-8"), tag=TikTok, update-interval=86400, opt-parser=false, enabled=true
+
+[server_local]
+
+
+[filter_local]
+FINAL,⛳️ 其他
+
+[rewrite_local]
+^https?:\/\/(www.)?(g|google)\.cn url 302 https://www.google.com
+(?<=_region=)CN(?=&) url 307 US
+(?<=&mcc_mnc=)4 url 307 2
+^(https?:\/\/(tnc|dm)[\w-]+\.\w+\.com\/.+)(\?)(.+) url 302  $1$3
+(?<=\d\/\?\w{7}_\w{4}=)1[6-9]..(?=.?.?&) url 307 17
+
+[mitm]
+passphrase = AA3BD70C
+p12 = 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
+hostname = *.tiktokv.com, *.byteoversea.com, *.tik-tokapi.com
+;skip_validating_cert = false
+;force_sni_domain_name = false
+;simple_cert_hostname = non-existed-domain.com, *.non-connected-domain.com

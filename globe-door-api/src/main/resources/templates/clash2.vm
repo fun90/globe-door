@@ -1,0 +1,65 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 0.0.0.0:9090
+
+#parse("clash-dns.vm")
+
+proxies:
+#foreach($server in $servers)
+  #if($server.protocol == "vmess")
+  - {name: $server.serverName, server: $server.clientDomain, port: $server.clientPort, type: vmess, uuid: $account.uuid, alterId: $account.maxConnection, cipher: auto, tls: true, skip-cert-verify: false, network: ws, ws-opts: {path: $server.wsPath, headers: {Host: $server.clientDomain}}, udp: false}
+  #elseif($server.protocol == "trojan")
+  - {name: $server.serverName, server: $server.clientDomain, port: $server.clientPort, type: trojan, password: $account.uuid, sni: $server.clientDomain, skip-cert-verify: false, udp: false}
+  #elseif($server.protocol == "vless")
+  #end
+#end
+
+#set($inclueItems = ["vmess", "trojan"])
+#set($supportSevers = [])
+#foreach($item in $servers)
+  #if($inclueItems.contains($item.protocol))
+    #set($result = $supportSevers.add($item))
+  #end
+#end
+#set($delimiter = $lineSeparator)
+#set($serverNames = "")
+#foreach($item in $supportSevers)
+  #if($inclueItems.contains($item.protocol))
+    #set($serverNames = "$serverNames      - $item.serverName$delimiter")
+  #end
+#end
+#parse("clash-proxies.vm")
+
+rules:
+#foreach( $rule in $ruleList)
+  - RULE-SET,$rule.name,$rule.group
+#end
+  - MATCH,⛳️ 其他
+
+rule-providers:
+##  AdvertisingLite:
+##    type: http
+##    behavior: classical
+##    url: "$rootUrl/subscribe/rules/clash2/AdvertisingLite.list"
+##    path: ./ruleset/AdvertisingLite.yaml
+##    interval: 86400
+##
+##  AdvertisingLiteDomain:
+##    type: http
+##    behavior: domain
+##    url: "$rootUrl/subscribe/rules/clash2/AdvertisingLiteDomain.list"
+##    path: ./ruleset/AdvertisingLiteDomain.yaml
+##    interval: 86400
+##
+#foreach( $rule in $ruleList)
+  $rule.name:
+    type: http
+    behavior: classical
+    url: "$rootUrl/subscribe/rules/clash2/${rule.name}.list"
+    path: ./ruleset/${rule.name}.yaml
+    interval: 86400
+
+#end

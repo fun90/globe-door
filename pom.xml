@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>com.fun90</groupId>
+    <artifactId>globe-door</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+
+    <description>Connect the world with Spring Boot 3</description>
+    <scm>
+        <url>https://github.com/fun90/globe-door</url>
+        <tag>${version}</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>fun90</name>
+            <email/>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>20</java.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <modules>
+        <module>globe-door-api</module>
+        <module>globe-door-jdk</module>
+    </modules>
+</project>

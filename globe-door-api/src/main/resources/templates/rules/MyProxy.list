@@ -1,0 +1,35 @@
+DOMAIN-SUFFIX,npmjs.org
+DOMAIN-SUFFIX,freechatgpt.lol
+DOMAIN-SUFFIX,freegpt.one
+DOMAIN-SUFFIX,jetbrains.com
+DOMAIN-SUFFIX,taoacat.com
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,asiantolick.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,bluestacks.com
+DOMAIN-SUFFIX,msecnd.net
+DOMAIN-SUFFIX,cnbeta.com
+DOMAIN-SUFFIX,tangrenjie.tv
+DOMAIN-SUFFIX,iyf1.tv
+DOMAIN-SUFFIX,shein.com
+# TikTok
+DOMAIN,p16-tiktokcdn-com.akamaized.net
+DOMAIN-SUFFIX,byteoversea.com
+DOMAIN-SUFFIX,ibytedtos.com
+DOMAIN-SUFFIX,ibyteimg.com
+DOMAIN-SUFFIX,ipstatp.com
+DOMAIN-SUFFIX,muscdn.com
+DOMAIN-SUFFIX,musical.ly
+DOMAIN-SUFFIX,sgpstatp.com
+DOMAIN-SUFFIX,snssdk.com
+DOMAIN-SUFFIX,tik-tokapi.com
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokcdn.com
+DOMAIN-SUFFIX,tiktokv.com
+DOMAIN-KEYWORD,-tiktokcdn-com
+DOMAIN-KEYWORD,-tiktokcdn-com
+# ssh
+DEST-PORT,22
+DEST-PORT,27149
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,githubassets.com
