@@ -1,17 +1,19 @@
 package com.fun90.globe.door.controller;
 
 //import com.fun90.admin.VO.AccountVO;
-//import com.fun90.admin.VO.UserVO;
-//import com.fun90.admin.cache.UserCache;
+//import com.fun90.globe.door.model.vo.UserVO;
+//import com.fun90.globe.door.cache.UserCache;
 //import com.fun90.admin.constant.KVConstant;
-//import com.fun90.admin.interceptor.PreAuth;
+//import com.fun90.globe.door.interceptor.PreAuth;
 //import com.fun90.admin.model.Account;
 //import com.fun90.admin.model.Server;
 //import com.fun90.admin.repository.ServerRepository;
 //import com.fun90.admin.service.AccountService;
 //import com.fun90.admin.service.ServerService;
-//import com.fun90.admin.util.Result;
+//import com.fun90.globe.door.model.Result;
 //import com.fun90.admin.util.Validator;
+
+import com.fun90.globe.door.interceptor.PreAuth;
 import com.fun90.globe.door.model.Result;
 import com.fun90.globe.door.model.vo.ServerVO;
 import com.fun90.globe.door.service.base.ServerService;
@@ -19,7 +21,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Slf4j
@@ -27,7 +31,7 @@ public class ServerController {
 	@Autowired
 	private ServerService serverService;
 
-//	@PreAuth("vip")
+	@PreAuth("vip")
 	@ResponseBody
 	@GetMapping("/server/{id}")
 	public Result<ServerVO> get(@PathVariable @NotNull(message = "id can not null") Integer id) {

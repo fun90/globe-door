@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    default-property-inclusion: non_null
   datasource:
     driver-class-name: org.sqlite.JDBC
     hikari:
