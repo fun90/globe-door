@@ -164,14 +164,7 @@
         responseData: '',
 
         mounted() {
-            // 尝试从本地存储获取用户信息
-            const storedUser = localStorage.getItem('user');
-            if (storedUser) {
-                this.user = JSON.parse(storedUser);
-            } else {
-                // 如果没有本地存储的用户信息，则从API获取
-                this.fetchCurrentUser();
-            }
+            this.fetchCurrentUser();
         },
 
         fetchCurrentUser() {
