@@ -9,5 +9,9 @@
 
 # 打包
 mvn clean package
+
 ./mvnw clean package
+
 mvn -Pnative native:compile
+
+./target/globe-door-api --spring.config.location=file:src/main/resources/application.yaml

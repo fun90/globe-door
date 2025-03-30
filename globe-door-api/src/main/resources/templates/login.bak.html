@@ -1,0 +1,117 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - Globe Door</title>
+    <!-- Tabler UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.1.1/dist/css/tabler.min.css">
+</head>
+<body class="d-flex flex-column">
+<div class="page page-center">
+    <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+            <h1 class="navbar-brand-autodark">
+                <img src="/static/logo.svg" height="36" alt="">
+            </h1>
+        </div>
+        <div class="card card-md">
+            <div class="card-body">
+                <h2 class="h2 text-center mb-4">登录到您的账户</h2>
+                <div id="error-message" class="alert alert-danger" style="display:none;"></div>
+                <div id="success-message" class="alert alert-success" style="display:none;"></div>
+                <form action="/api/login/auth" method="POST" id="login-form">
+                    <div class="mb-3">
+                        <label class="form-label">邮箱地址</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">
+                            密码
+                            <span class="form-label-description">
+                                    <a href="/forgot-password">忘记密码</a>
+                                </span>
+                        </label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="您的密码" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-check">
+                            <input type="checkbox" name="rememberMe" id="rememberMe" class="form-check-input"/>
+                            <span class="form-check-label">记住我</span>
+                        </label>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100">
+                            登录
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center text-muted mt-3">
+            还没有账户? <a href="/register" tabindex="-1">注册</a>
+        </div>
+    </div>
+</div>
+
+<!-- Tabler UI JS -->
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.1.1/dist/js/tabler.min.js"></script>
+<script>
+    // // 表单提交前的校验
+    // document.getElementById('login-form').addEventListener('submit', function(event) {
+    //     event.preventDefault();
+    //
+    //     var email = document.getElementById('email').value;
+    //     var password = document.getElementById('password').value;
+    //     var rememberMe = document.getElementById('rememberMe').checked;
+    //
+    //     var errorMessage = '';
+    //     var successMessage = '';
+    //
+    //     // 校验邮箱和密码
+    //     if (!email || !password) {
+    //         errorMessage = '请填写所有必填字段。';
+    //     } else if (!/\S+@\S+\.\S+/.test(email)) {
+    //         errorMessage = '请输入有效的邮箱地址。';
+    //     }
+    //
+    //     if (errorMessage) {
+    //         document.getElementById('error-message').textContent = errorMessage;
+    //         document.getElementById('error-message').style.display = 'block';
+    //         return;
+    //     }
+    //
+    //     // 提交表单
+    //     var formData = new FormData(this);
+    //
+    //     fetch('/api/login/auth', {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 successMessage = '登录成功!';
+    //                 document.getElementById('success-message').textContent = successMessage;
+    //                 document.getElementById('success-message').style.display = 'block';
+    //                 localStorage.setItem('user', JSON.stringify(data.user));
+    //
+    //                 // 重定向到仪表板
+    //                 setTimeout(() => {
+    //                     window.location.href = '/dashboard';
+    //                 }, 1000);
+    //             } else {
+    //                 errorMessage = '登录失败，请检查您的凭据';
+    //                 document.getElementById('error-message').textContent = errorMessage;
+    //                 document.getElementById('error-message').style.display = 'block';
+    //             }
+    //         })
+    //         .catch(error => {
+    //             document.getElementById('error-message').textContent = '网络错误，请稍后再试';
+    //             document.getElementById('error-message').style.display = 'block';
+    //         });
+    // });
+</script>
+</body>
+</html>

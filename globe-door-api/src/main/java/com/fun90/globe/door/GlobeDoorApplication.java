@@ -8,9 +8,9 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class GlobeDoorApplication {
 
-	public static void main(String[] args) {
-		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
-		SpringApplication.run(GlobeDoorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+        SpringApplication.run(GlobeDoorApplication.class, args);
+    }
 
 }

@@ -1,34 +1,46 @@
 package com.fun90.globe.door.model.entity;
 
-import com.fun90.globe.door.model.BaseModel;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+
+@Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-public class User extends BaseModel {
-	@Column(unique = true)
-	private String email;
-	@Column(nullable = false)
-	private String password;
-	private String nickName;
-	@Column(nullable = false)
-	private String role;
-
-	private Integer status = 1;
-
-	private String remark;
-
-
-	@Transient
-	private String vCode;
-	//邀请码
-	@Transient
-	private String inviteCode;
+@Table(name = "user")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
+    
+    private String nickName;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    private String remark;
+    
+    private String role;
+    
+    private Long referrer;
+    
+    private Short disabled = 0;
+    
+    private LocalDateTime createTime;
+    
+    private LocalDateTime updateTime;
+    
+    @PrePersist
+    protected void onCreate() {
+        this.createTime = LocalDateTime.now();
+        this.updateTime = LocalDateTime.now();
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        this.updateTime = LocalDateTime.now();
+    }
 }

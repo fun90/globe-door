@@ -1,4 +1,4 @@
-package com.fun90.globe.door.util;
+package com.fun90.globe.door.support.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
